@@ -14,31 +14,62 @@ function comecar(){
 }
 comecar()
 function colocarCartas(){
-    const inputdeCartas = document.querySelector(".cima").querySelector("ul")
-    console.log(inputdeCartas)
+    const inputdeCartasCima = document.querySelector(".cima")
     let contador=0 
-    console.log(quantasCartas)
     while(contador<quantasCartas/2){
-        inputdeCartas.innerHTML +=`<li> <div class="carta">
-        <img src="/imagens/front.png" alt="" width="100px" height="100px">
-    </div></li>`
+        inputdeCartasCima.innerHTML +=`
+            <div class="carta">
+                <img src="/imagens/front.png" alt="" width="100px" height="100px" >
+            </div>`
+    contador++
+    }
+    const inputdeCartasBaixo = document.querySelector(".baixo") 
+    while(contador<quantasCartas){
+        inputdeCartasBaixo.innerHTML +=`
+            <div class="carta">
+                <img src="/imagens/front.png" alt="" width="100px" height="100px" class="posicao${contador}" onclick="viraraCarta(this)">
+            </div>`
     contador++
     }
 }
 colocarCartas()
 
-function escolherCartas(){
+function comparador() { 
+	return Math.random() - 0.5; 
 
 }
-    
+function gerarCartas(){
+    let listaHtml = document.querySelector(".gif").querySelectorAll("img")
+    let i =0 
+    let listaDuplicada=[]
+    while(i<7){
+        listaDuplicada.push(listaHtml[i])
+        listaDuplicada.push(listaHtml[i])
+        i = i+1
+    }
+    listaDuplicada.splice(quantasCartas,13)
+    let tamanho = listaDuplicada.length
+    let listadeFiguras=[]
+    i=0
+    while(i<tamanho){
+        listadeFiguras.push({imagem: listaDuplicada[i], posicao:"indefinida", status:"fechado"})
+        i++
+    }
+    let index= []
+    i=0
+    while(i<tamanho){
+        index[i] = i
+        i++
+    }
+    let posicao = index.sort(comparador);   
+    i=0  
+    while(i<tamanho){
+        listadeFiguras[i].posicao= posicao[i]
+        i++
+    }
+    console.log(listadeFiguras)
+}
+gerarCartas()
+function mostrarCartas(){
 
-
-///function pegarImagens(){
- //   const listadeFiguras=[
-   //     {imagem:"", posicao:"", status:""}]
-    //const listaHtml = document.querySelector(".gif").querySelectorAll("img")
-    //const objetosdeFiguras = [{
-     //   imagem:"", posicao:"", status:""
-    //}]
-//}
-//pegarImagens()
+}

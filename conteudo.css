@@ -17,21 +17,37 @@ body{
     justify-content: center;
     margin-top: 40px;
 }
-.play{
-    display: inline;
-    justify-content: space-around;
-    align-items: center;
-}
-.organizar{ 
-}
-.cima{
-    width:100%;
-    height:200px;
+.playplace{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background-color: red;
+    margin-top: 15px;
+}
+.organizar{ 
+    
+}
+.cima {
+    width:80%;
+    height:200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+}
+.baixo{
+    width:80%;
+    height:200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+}
+.carta:hover{
+    cursor: pointer;
+    filter: brightness(125%);
 }
 .carta{
     width: 117px;
@@ -39,4 +55,10 @@ body{
     border-radius: 5px;
     box-sizing: border-box;
     background-color: #A7E9AF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.escondido {
+    display: none;
 }
