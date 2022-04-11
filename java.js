@@ -129,7 +129,7 @@ function virar(element){
                     CartaValida2.classList.add("escondido2")
                 }
                 eliminar()
-                alert(`Parabens! Você completou o jogo em ${contadordeJogadas+1}`)
+                alert(`Parabens! Você completou o jogo em ${(contadordeJogadas+1*2)}`)
             }else{    
             function eliminar(){
                 

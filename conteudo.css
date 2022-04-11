@@ -38,7 +38,6 @@ body{
 }
 .baixo{
     width:80%;
-    
     height:200px;
     display: flex;
     flex-direction: row;
@@ -49,6 +48,9 @@ body{
 .carta:hover{
     cursor: pointer;
     filter: brightness(125%);
+}
+.carta:active{
+    transform: rotateY(180deg);
 }
 .carta{
     width: 117px;
@@ -67,4 +69,16 @@ body{
     background-color: #EEF9BF;
     border: 0px;
     z-index: 1;
+}
+@media (max-width: 767px) {
+    .cima{
+        flex-direction: column;
+        align-content: space-around;  
+        height: auto;      
+    }
+    .baixo{
+        flex-direction: column;
+        align-content: space-around;
+        height: auto;
+    }
 }
