@@ -120,6 +120,15 @@ function virar(element){
         console.log(carta1)
         console.log(carta2)
         contadordeCartas = 0
+        
+        function esconderCarta(CartaValida1,CartaValida2){
+
+            CartaValida1.querySelector(".gif").classList.add("escondido")
+            CartaValida1.querySelector(".display").classList.remove("escondido")
+            
+            CartaValida2.querySelector(".gif").classList.add("escondido")
+            CartaValida2.querCartaValida2Selector(".display").classList.remove("escondido")
+        }
         if(carta1==carta2){
             CartaValida1.classList.add("escondido")
             CartaValida2.classList.add("escondido")
@@ -128,16 +137,10 @@ function virar(element){
                 alert(`Parabens! Você completou o jogo em ${contadordeJogadas/2}`)
                 comecar()
             }
-            function esconderCarta(CartaValida1,CartaValida2){
-
-                CartaValida1.querySelector(".gif").classList.add("escondido")
-                CartaValida1.querySelector(".display").classList.remove("escondido")
-                
-                CartaValida2.querySelector(".gif").classList.add("escondido")
-                CartaValida2.querCartaValida2Selector(".display").classList.remove("escondido")
-            }
         }else{
             setTimeout(esconderCarta,5000);
+            esconderCarta(CartaValida1,CartaValida2);
+
         }
         
     }
