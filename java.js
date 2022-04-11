@@ -6,8 +6,8 @@ let inputdeCartasCima;
 let listaEmbaralhada = []
 let contadordeCartas = 0
 let contadordeJogadas;
-let carta1;
-let carta2;
+let carta1 = ""
+let carta2 = ""
 let CartaValida1;
 let CartaValida2
 function comecar(){
@@ -95,44 +95,50 @@ function virar(element){
     if(element == CartaValida1){
         return CartaValida1
     }
-    contadordeCartas++
-    element.querySelector(".display").classList.add("escondido")
-    element.querySelector(".gif").classList.remove("escondido")
-    element.classList.add("selecionada")
-    let CartaValida = element
-    console.log(CartaValida)
     
+    contadordeCartas = contadordeCartas +1
+
     if(contadordeCartas==1){
-        CartaValida1 = CartaValida
-        return CartaValida1
+        mostrarCarta(element)
+        CartaValida1 = element
+        return CartaValida1 
     }
-    carta1=CartaValida1.innerHTML 
-
-    if(contadordeCartas==2){
-        CartaValida2 = CartaValida
-        carta2=CartaValida2.innerHTML
-
+    if(contadordeCartas==2){ 
+        mostrarCarta(element)
+        carta1 = CartaValida1.innerHTML
+        CartaValida2 = element
+        carta2 = CartaValida2.innerHTML
+        console.log(carta1)
+        console.log(carta2)
         if(carta1==carta2){
             CartaValida1.classList.add("escondido")
             CartaValida2.classList.add("escondido")
+            contadordeCartas = 0
             CartasAcertadas++
-            if(CartasAcertadas = quantasCartas)
-            return alert("Parabens!")
+            if(CartasAcertadas = quantasCartas){
+                alert(`Parabens! Você completou o jogo em ${contadordeJogadas/2}`)
+                comecar()
+            }
+        }else{
+            setTimeOut(esconderCarta(),500);
+            x = CartaValida1
+            y = CartaValida2
         }
-        else{
-            CartaValida1.querySelector(".gif").classList.add("escondido")
-            CartaValida1.querySelector(".display").classList.remove("escondido")
-            CartaValida1.classList.remove("selecionada")
-            
-            CartaValida2.querySelector(".gif").classList.add("escondido")
-            CartaValida2.querySelector(".display").classList.remove("escondido")
-            CartaValida2.classList.remove("selecionada")
-            CartaValida1;
-            CartaValida2;
-        }
-        contadordeCartas=0
-        CartaValida1;
+        
     }
     contadordeJogadas++
-    return CartaValida1
+}
+function mostrarCarta(element){
+    element.querySelector(".display").classList.toggle("escondido")
+    element.querySelector(".gif").classList.toggle("escondido")
+}
+function esconderCarta(x,y){
+    x.querySelector(".gif").classList.add("escondido")
+    x.querySelector(".display").classList.remove("escondido")
+       
+    y.querySelector(".gif").classList.add("escondido")
+    y.querySelector(".display").classList.remove("escondido")
+    x;
+    y;
+    contadordeCartas = 0
 }
