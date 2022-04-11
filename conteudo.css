@@ -62,6 +62,8 @@ body{
 .escondido {
     display: none;
 }
-.selecionada{
-    
+.escondido2{
+    background-color: #EEF9BF;
+    border: 0px;
+    z-index: 1;
 }
