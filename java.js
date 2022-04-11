@@ -6,11 +6,13 @@ let inputdeCartasCima;
 let listaEmbaralhada = []
 let contadordeCartas = 0
 let contadordeJogadas;
-let carta1 = ""
-let carta2 = ""
+let carta1;
+let carta2;
 let CartaValida1;
 let CartaValida2
 let CartasAcertadas = 0
+let x;
+let y;
 function comecar(){
     quantasCartas = prompt("Com quantas cartas deseja jogar?")
     if(quantasCartas%2 ==0 && quantasCartas<14 && quantasCartas>4){
@@ -98,16 +100,7 @@ function virar(element){
         element.querySelector(".display").classList.toggle("escondido")
         element.querySelector(".gif").classList.toggle("escondido")
     }
-    function esconderCarta(x,y){
-        x.querySelector(".gif").classList.add("escondido")
-        x.querySelector(".display").classList.remove("escondido")
-        
-        y.querySelector(".gif").classList.add("escondido")
-        y.querySelector(".display").classList.remove("escondido")
-        x;
-        y;
-    }
-
+    
     if(element == CartaValida1){
         return CartaValida1
     }
@@ -126,19 +119,25 @@ function virar(element){
         carta2 = CartaValida2.innerHTML
         console.log(carta1)
         console.log(carta2)
+        contadordeCartas = 0
         if(carta1==carta2){
             CartaValida1.classList.add("escondido")
             CartaValida2.classList.add("escondido")
-            contadordeCartas = 0
             CartasAcertadas++
             if(CartasAcertadas = quantasCartas){
                 alert(`Parabens! Você completou o jogo em ${contadordeJogadas/2}`)
                 comecar()
             }
+            function esconderCarta(CartaValida1,CartaValida2){
+
+                CartaValida1.querySelector(".gif").classList.add("escondido")
+                CartaValida1.querySelector(".display").classList.remove("escondido")
+                
+                CartaValida2.querySelector(".gif").classList.add("escondido")
+                CartaValida2.querCartaValida2Selector(".display").classList.remove("escondido")
+            }
         }else{
-            setTimeout(esconderCarta(),500);
-            x = CartaValida1
-            y = CartaValida2
+            setTimeout(esconderCarta,5000);
         }
         
     }
