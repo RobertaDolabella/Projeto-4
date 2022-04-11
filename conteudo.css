@@ -32,16 +32,17 @@ body{
     height:200px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     margin-top: 40px;
 }
 .baixo{
     width:80%;
+    
     height:200px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     margin-top: 40px;
 }
