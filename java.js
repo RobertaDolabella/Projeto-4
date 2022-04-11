@@ -4,8 +4,12 @@ let listaDuplicada=[]
 let inputdeCartasBaixo;
 let inputdeCartasCima;
 let listaEmbaralhada = []
+let contadordeCartas = 0
 let contadordeJogadas;
-let contadordeCartas=0
+let carta1;
+let carta2;
+let CartaValida1;
+let CartaValida2
 function comecar(){
     quantasCartas = prompt("Com quantas cartas deseja jogar?")
     if(quantasCartas%2 ==0 && quantasCartas<14 && quantasCartas>4){
@@ -16,14 +20,16 @@ function comecar(){
             quantasCartas = prompt("Com quantas cartas deseja jogar?")
         }
     }
+    colocarCartas()
 }
+
 comecar()
 function comparador() { 
 	return Math.random() - 0.5; 
 
 }
 function gerarCartas(){
-    let listagifs = ["${/imagens/bobrossparrot.gif}","/imagens/explodyparrot.gif","/imagens/fiestaparrot.gif","/imagens/metalparrot.gif","/imagens/revertitparrtot.gif","/imagens/tripletsparrot.gif","/imagens/unicornparrot.gif"]
+    let listagifs = ["./imagens/bobrossparrot.gif","./imagens/explodyparrot.gif","./imagens/fiestaparrot.gif","./imagens/metalparrot.gif","./imagens/revertitparrot.gif","./imagens/tripletsparrot.gif","./imagens/unicornparrot.gif"]
     let i =0 
     while(i<7){
         listaDuplicada.push(listagifs[i])
@@ -61,67 +67,72 @@ function gerarCartas(){
         listaEmbaralhada.push(listadeImagens[m].imagem)
         i++
     }
-    console.log(listaEmbaralhada)
+    return listaEmbaralhada
 }
-
 function colocarCartas(){
+    gerarCartas()
     const inputdeCartasCima = document.querySelector(".cima")
     let contador=0 
     while(contador<quantasCartas/2){
         inputdeCartasCima.innerHTML +=`
-            <div class="carta" onclick="virar(this)">
+            <button class="carta" onclick="virar(this)">
                 <img src="/imagens/front.png" alt="" width="100px" height="100px" class="display" >
                 <img src="${listaEmbaralhada[contador]}" width="90px" height="90px" class="gif escondido">
-            </div>`
+            </button>`
     contador++
     }
     const inputdeCartasBaixo = document.querySelector(".baixo") 
     while(contador<quantasCartas){
         inputdeCartasBaixo.innerHTML +=`
-            <div class="carta" onclick="virar(this)">
+            <button class="carta" onclick="virar(this)">
                 <img src="/imagens/front.png" alt="" width="100px" height="100px" class="display">
-                <img src="${listaEmbaralhada[contador]}" width="90px" height="90px" class="gif escondido">
-            </div>`
+                <img src='${listaEmbaralhada[contador]}'' width="90px" height="90px" class="gif escondido">
+            </button>`
     contador++
     }
 }
 function virar(element){
+    if(element == CartaValida1){
+        return CartaValida1
+    }
     contadordeCartas++
-    let carta1;
-    let carta2;
     element.querySelector(".display").classList.add("escondido")
     element.querySelector(".gif").classList.remove("escondido")
     element.classList.add("selecionada")
-    teste = element.classList.add("selecionada")
-    console.log(teste)
+    let CartaValida = element
+    console.log(CartaValida)
+    
     if(contadordeCartas==1){
-        carta1=element.querySelector(".selecionada").querySelector(".gif")
+        CartaValida1 = CartaValida
+        return CartaValida1
     }
-    else if(contadordeCartas==2){
-        carta2=element.querySelector(".selecionada").querySelector(".gif")
+    carta1=CartaValida1.innerHTML 
+
+    if(contadordeCartas==2){
+        CartaValida2 = CartaValida
+        carta2=CartaValida2.innerHTML
+
         if(carta1==carta2){
-            carta1.remove(carta1)
-            carta2.remove(carta2)
-            carta1;
-            carta2;
+            CartaValida1.classList.add("escondido")
+            CartaValida2.classList.add("escondido")
+            CartasAcertadas++
+            if(CartasAcertadas = quantasCartas)
+            return alert("Parabens!")
         }
         else{
-            document.querySelector(".selecionada").querySelector(".display").classList.remove("escondido")
-            document.querySelector(".selecionada").querySelector(".gif").classList.add("escondido")
-            document.querySelector(".selecionada").classList.remove("selecionada")
+            CartaValida1.querySelector(".gif").classList.add("escondido")
+            CartaValida1.querySelector(".display").classList.remove("escondido")
+            CartaValida1.classList.remove("selecionada")
             
-            
-            document.querySelector(".selecionada").querySelector(".display").classList.remove("escondido")
-            document.querySelector(".selecionada").querySelector(".gif").classList.add("escondido")
-            document.querySelector(".selecionada").classList.remove("selecionada")
-            carta1;
-            carta2;
+            CartaValida2.querySelector(".gif").classList.add("escondido")
+            CartaValida2.querySelector(".display").classList.remove("escondido")
+            CartaValida2.classList.remove("selecionada")
+            CartaValida1;
+            CartaValida2;
         }
         contadordeCartas=0
+        CartaValida1;
     }
-    
     contadordeJogadas++
+    return CartaValida1
 }
-console.log(listaEmbaralhada)
-colocarCartas()
-gerarCartas()
