@@ -11,8 +11,6 @@ let carta2;
 let CartaValida1;
 let CartaValida2
 let CartasAcertadas = 0
-let x;
-let y;
 function comecar(){
     quantasCartas = prompt("Com quantas cartas deseja jogar?")
     if(quantasCartas%2 ==0 && quantasCartas<14 && quantasCartas>4){
@@ -127,18 +125,20 @@ function virar(element){
             CartaValida1.querySelector(".display").classList.remove("escondido")
             
             CartaValida2.querySelector(".gif").classList.add("escondido")
-            CartaValida2.querCartaValida2Selector(".display").classList.remove("escondido")
+            CartaValida2.querySelector(".display").classList.remove("escondido")
         }
         if(carta1==carta2){
             CartaValida1.classList.add("escondido")
             CartaValida2.classList.add("escondido")
             CartasAcertadas++
-            if(CartasAcertadas = quantasCartas){
+            if(CartasAcertadas = quantasCartas/2){
+                CartasAcertadas = 0
                 alert(`Parabens! Você completou o jogo em ${contadordeJogadas/2}`)
                 comecar()
             }
         }else{
-            setTimeout(esconderCarta,5000);
+            function tempo(){}
+            setTimeout(tempo(),5000);
             esconderCarta(CartaValida1,CartaValida2);
 
         }
