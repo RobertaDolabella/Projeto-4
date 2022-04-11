@@ -1,0 +1,46 @@
+function colocarCartas(){
+    const inputdeCartasCima = document.querySelector(".cima")
+    let contador=0 
+    while(contador<quantasCartas/2){
+        inputdeCartasCima.innerHTML +=`
+            <div class="carta" onclick="mostrarCartas(this,${contador})">
+                <img src="/imagens/front.png" alt="" width="100px" height="100px" >
+            </div>`
+    contador++
+    }
+    const inputdeCartasBaixo = document.querySelector(".baixo") 
+    while(contador<quantasCartas){
+        inputdeCartasBaixo.innerHTML +=`
+            <div class="carta" onclick="mostrarCartas(this,${contador})">
+                <img src="/imagens/front.png" alt="" width="100px" height="100px">
+            </div>`
+    contador++
+    }
+}
+
+function mostrarCartas(elemento, contador){
+    let i = 0
+    let fila = listadeFiguras[0].posicao
+    while(fila!=contador){
+        i++
+        fila = listadeFiguras[i].posicao
+    }
+    console.log(fila)
+    console.log(listaDuplicada[i].imagem)
+    elemento = `
+    <div class="carta">
+        <${listaDuplicada[i].imagem}>
+    </div>`
+
+}
+
+while(i<tamanho){
+    listadeImagens.push({imagem: ${listaDuplicada[i]}, posicao:"indefinida", status:"fechado"})
+    i++
+}
+console.log(fila)
+    console.log(listadeFiguras[i].imagem)
+    elemento.innerHTML = `
+    <div class="carta">
+        ${listadeFiguras[i].imagem}
+    </div>`

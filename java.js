@@ -3,47 +3,29 @@ let listadeFiguras = []
 let listaDuplicada=[]
 let inputdeCartasBaixo;
 let inputdeCartasCima;
+let listaEmbaralhada = []
 function comecar(){
     quantasCartas = prompt("Com quantas cartas deseja jogar?")
-    if(quantasCartas%2 !== 0 || quantasCartas%2 == isNaN ){
-        alert("O numero de cartas deve ser par")
-        quantasCartas = prompt("Com quantas cartas deseja jogar?")
-        while(quantasCartas%2 !== 0 ||quantasCartas%2 == isNaN){
-        alert("O numero de cartas deve ser par")
-        quantasCartas = prompt("Com quantas cartas deseja jogar?")
+    if(quantasCartas%2 ==0 && quantasCartas<14 && quantasCartas>4){
+    }
+    else{
+        while(quantasCartas%2 !== 0 || quantasCartas>14 || quantasCartas<4 || quantasCartas == isNaN){
+            alert("O numero de cartas deve ser par e deve estar no intervalo entre 4 e 14.")
+            quantasCartas = prompt("Com quantas cartas deseja jogar?")
         }
     }
 }
 comecar()
-function colocarCartas(){
-    const inputdeCartasCima = document.querySelector(".cima")
-    let contador=0 
-    while(contador<quantasCartas/2){
-        inputdeCartasCima.innerHTML +=`
-            <div class="carta" onclick="mostrarCartas(this,${contador})">
-                <img src="/imagens/front.png" alt="" width="100px" height="100px" >
-            </div>`
-    contador++
-    }
-    const inputdeCartasBaixo = document.querySelector(".baixo") 
-    while(contador<quantasCartas){
-        inputdeCartasBaixo.innerHTML +=`
-            <div class="carta" onclick="mostrarCartas(this,${contador})">
-                <img src="/imagens/front.png" alt="" width="100px" height="100px">
-            </div>`
-    contador++
-    }
-}
 function comparador() { 
 	return Math.random() - 0.5; 
 
 }
 function gerarCartas(){
-    let listaHtml = document.querySelector(".gif").querySelectorAll("img")
+    let listagifs = ["./imagens/bobrossparrot.gif","./imagens/explodyparrot.gif","./imagens/fiestaparrot.gif","./imagens/metalparrot.gif","./imagens/revertitparrtot.gif","./imagens/tripletsparrot.gif","./imagens/unicornparrot.gif"]
     let i =0 
     while(i<7){
-        listaDuplicada.push(listaHtml[i])
-        listaDuplicada.push(listaHtml[i])
+        listaDuplicada.push(listagifs[i])
+        listaDuplicada.push(listagifs[i])
         i = i+1
     }
     console.log(listaDuplicada)
@@ -68,25 +50,42 @@ function gerarCartas(){
         listadeImagens[i].posicao= listaAleatoria[i]
         i++
     }
-    listadeFiguras = listadeImagens
-    console.log(listadeFiguras)
+    i=0
+    while(i<tamanho){
+        let m=0
+        while(listadeImagens[m].posicao!=i){
+            m++
+        }
+        listaEmbaralhada.push(listadeImagens[m])
+        i++
+    }
+    console.log(listaEmbaralhada)
 }
 
-
-function mostrarCartas(elemento, contador){
-    let i = 0
-    let fila = listadeFiguras[0].posicao
-    while(fila!=contador){
-        i++
-        fila = listadeFiguras[i].posicao
+function colocarCartas(){
+    const inputdeCartasCima = document.querySelector(".cima")
+    let contador=0 
+    while(contador<quantasCartas/2){
+        inputdeCartasCima.innerHTML +=`
+            <div class="carta" onclick="virar(this)">
+                <img src="/imagens/front.png" alt="" width="100px" height="100px" class="display" >
+                <img src="${listaEmbaralhada[contador]}" width="90px" height="90px" class="gif escondido">
+            </div>`
+    contador++
     }
-    console.log(fila)
-    console.log(listadeFiguras[i].imagem)
-    elemento.innerHTML = `
-    <div class="carta">
-        ${listadeFiguras[i].imagem}
-    </div>`
-
+    const inputdeCartasBaixo = document.querySelector(".baixo") 
+    while(contador<quantasCartas){
+        inputdeCartasBaixo.innerHTML +=`
+            <div class="carta" onclick="virar(this)">
+                <img src="/imagens/front.png" alt="" width="100px" height="100px" class="display">
+                <img src="${listaEmbaralhada[contador]}" width="90px" height="90px" class="gif escondido">
+            </div>`
+    contador++
+    }
+}
+function virar(element){
+    element.querySelector(".display").classList.add("escondido")
+    element.querySelector(".gif").classList.remove("escondido")
 }
 colocarCartas()
 gerarCartas()
